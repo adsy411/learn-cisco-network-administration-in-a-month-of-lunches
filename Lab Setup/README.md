@@ -1,0 +1,1 @@
+Lab setup instructions here: http://benpiper.github.io/learn-cisco-network-administration-in-a-month-of-lunches/
