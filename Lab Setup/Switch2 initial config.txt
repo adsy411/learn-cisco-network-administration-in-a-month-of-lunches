@@ -15,6 +15,7 @@ enable secret 5 $1$UC8P$mwM.rQZLYGvgg.sFFwEK4.
 username admin privilege 15 secret 5 $1$8gpL$EzQVt422u4kjdXQfa93TT.
 no aaa new-model
 system mtu routing 1500
+no ip domain-lookup
 !
 !
 !
@@ -110,8 +111,10 @@ interface FastEthernet0/21
 interface FastEthernet0/22
 !
 interface FastEthernet0/23
+ switchport trunk allowed vlan none
 !
 interface FastEthernet0/24
+ switchport trunk allowed vlan none
 !
 interface GigabitEthernet0/1
 !
