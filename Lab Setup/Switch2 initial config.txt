@@ -16,34 +16,13 @@ username admin privilege 15 secret 5 $1$8gpL$EzQVt422u4kjdXQfa93TT.
 no aaa new-model
 system mtu routing 1500
 no ip domain-lookup
-!
-!
-!
-!
-!
-!
-!
-!
-!
+ip domain-name benpiper.com
 !
 !
 spanning-tree mode pvst
 spanning-tree extend system-id
 !
 vlan internal allocation policy ascending
-!
-!
-!
-!
-!
-!
-!
-!
-!
-!
-!
-!
-!
 !
 !
 interface FastEthernet0/1
@@ -111,10 +90,8 @@ interface FastEthernet0/21
 interface FastEthernet0/22
 !
 interface FastEthernet0/23
- switchport trunk allowed vlan 1
 !
 interface FastEthernet0/24
- switchport trunk allowed vlan 1
 !
 interface GigabitEthernet0/1
 !
@@ -125,10 +102,6 @@ interface Vlan1
 !
 ip http server
 ip http secure-server
-!
-!
-!
-!
 !
 !
 line con 0
