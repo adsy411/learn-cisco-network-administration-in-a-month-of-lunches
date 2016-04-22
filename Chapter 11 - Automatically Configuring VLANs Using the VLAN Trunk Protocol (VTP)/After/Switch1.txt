@@ -1,0 +1,313 @@
+version 15.0
+no service pad
+service timestamps debug datetime msec
+service timestamps log uptime
+no service password-encryption
+!
+hostname Switch1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$wJQg$IRxbfNX1gI2I.OhH2Z7rw/
+!
+username admin privilege 15 secret 5 $1$r/gI$sNjAw2i0L1Syobws.5tzT1
+no aaa new-model
+clock timezone EST -4 0
+system mtu routing 1500
+ip routing
+no ip domain-lookup
+!
+ip dhcp excluded-address 172.31.70.1 172.31.70.49
+ip dhcp excluded-address 172.31.70.251 172.31.70.254
+ip dhcp excluded-address 172.31.60.1 172.31.60.49
+ip dhcp excluded-address 172.31.60.251 172.31.60.254
+!
+ip dhcp pool Executives
+ network 172.31.70.0 255.255.255.0
+ dns-server 192.168.100.10 192.168.100.11
+ default-router 172.31.70.254
+ domain-name benpiper.com
+ lease 3 12
+!
+ip dhcp pool HR
+ network 172.31.60.0 255.255.255.0
+ dns-server 192.168.100.10 192.168.100.11
+ default-router 172.31.60.254
+ domain-name benpiper.com
+ lease 7
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-2873134592
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2873134592
+ revocation-check none
+ rsakeypair TP-self-signed-2873134592
+!
+!
+crypto pki certificate chain TP-self-signed-2873134592
+ certificate self-signed 01
+  3082022B 30820194 A0030201 02020101 300D0609 2A864886 F70D0101 05050030
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274
+  69666963 6174652D 32383733 31333435 3932301E 170D3933 30333031 30303030
+  35385A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D32 38373331
+  33343539 3230819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281
+  81009A2E 609D61A9 DEA94408 957224BE F101E88F EEE81727 78D87DE9 EB49789E
+  E9FCA164 7DFD062E F253A444 6636462A 14BBE77E 2E85E269 591B9265 CA4AC9F7
+  24F7336B 367578C9 B51E6152 544D5A6B 2491C68E 42EE57F7 68C2DCFA BAEB7B24
+  9CD7C16A 692BC520 4DB966AE 246DD6F7 6216C470 DF2B2619 0CD51DB7 F8EAC60B
+  F8290203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 301F0603
+  551D2304 18301680 1439D6B6 2791E0C2 9A0C8085 21F260FB 47B90BE1 71301D06
+  03551D0E 04160414 39D6B627 91E0C29A 0C808521 F260FB47 B90BE171 300D0609
+  2A864886 F70D0101 05050003 81810093 9833E4B5 8B8894E5 DE90C302 650C3FDC
+  8962E9AD FC9B427D 3A987151 C3ADF49D B24C9CD8 10552DD9 D2957ABD 2185427A
+  8A337315 B29BB3AE 16E091AD 12E8650A B24B2CD2 2D2B1B21 9FB3F6D5 58D86D6D
+  CCAA51F9 A250CD98 E2FC5753 06AF34E9 FA2E4272 EC2DED42 83B0A7CB 17DDC5EF
+  49C4F3C0 8DE6C229 635DD516 E8836D
+        quit
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/1
+ switchport mode access
+ switchport port-security maximum 3
+ switchport port-security
+ switchport port-security aging time 10
+ switchport port-security violation restrict
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 0800.7200.3131
+!
+interface FastEthernet0/2
+ switchport mode access
+ switchport port-security maximum 3
+ switchport port-security
+ switchport port-security aging time 10
+ switchport port-security violation restrict
+!
+interface FastEthernet0/3
+ switchport mode access
+ switchport port-security maximum 3
+ switchport port-security
+ switchport port-security aging time 10
+ switchport port-security violation restrict
+!
+interface FastEthernet0/4
+ switchport mode access
+ switchport port-security maximum 3
+ switchport port-security
+ switchport port-security aging time 10
+ switchport port-security violation restrict
+!
+interface FastEthernet0/5
+ switchport mode access
+ switchport port-security maximum 3
+ switchport port-security
+ switchport port-security aging time 10
+ switchport port-security violation restrict
+!
+interface FastEthernet0/6
+ switchport mode access
+ switchport port-security maximum 3
+ switchport port-security
+ switchport port-security aging time 10
+ switchport port-security violation restrict
+!
+interface FastEthernet0/7
+ switchport mode access
+ switchport port-security maximum 3
+ switchport port-security
+ switchport port-security aging time 10
+ switchport port-security violation restrict
+!
+interface FastEthernet0/8
+ switchport mode access
+ switchport port-security maximum 3
+ switchport port-security
+ switchport port-security aging time 10
+ switchport port-security violation restrict
+!
+interface FastEthernet0/9
+ switchport mode access
+ switchport port-security maximum 3
+ switchport port-security
+ switchport port-security aging time 10
+ switchport port-security violation restrict
+!
+interface FastEthernet0/10
+ switchport mode access
+ switchport port-security maximum 3
+ switchport port-security
+ switchport port-security aging time 10
+ switchport port-security violation restrict
+!
+interface FastEthernet0/11
+ switchport mode access
+ switchport port-security maximum 3
+ switchport port-security
+ switchport port-security aging time 10
+ switchport port-security violation restrict
+!
+interface FastEthernet0/12
+ switchport mode access
+ switchport port-security maximum 3
+ switchport port-security
+ switchport port-security aging time 10
+ switchport port-security violation restrict
+!
+interface FastEthernet0/13
+ switchport mode access
+ switchport port-security maximum 3
+ switchport port-security
+ switchport port-security aging time 10
+ switchport port-security violation restrict
+!
+interface FastEthernet0/14
+ switchport mode access
+ switchport port-security maximum 3
+ switchport port-security
+ switchport port-security aging time 10
+ switchport port-security violation restrict
+!
+interface FastEthernet0/15
+ switchport mode access
+ switchport port-security maximum 3
+ switchport port-security
+ switchport port-security aging time 10
+ switchport port-security violation restrict
+!
+interface FastEthernet0/16
+ switchport mode access
+ switchport port-security maximum 3
+ switchport port-security
+ switchport port-security aging time 10
+ switchport port-security violation restrict
+!
+interface FastEthernet0/17
+ switchport mode access
+ switchport port-security maximum 3
+ switchport port-security
+ switchport port-security aging time 10
+ switchport port-security violation restrict
+!
+interface FastEthernet0/18
+ switchport mode access
+ switchport port-security maximum 3
+ switchport port-security
+ switchport port-security aging time 10
+ switchport port-security violation restrict
+!
+interface FastEthernet0/19
+ switchport access vlan 600
+ switchport mode access
+ switchport voice vlan 20
+ switchport port-security maximum 3
+ switchport port-security
+ switchport port-security aging time 10
+ switchport port-security violation restrict
+ spanning-tree portfast
+!
+interface FastEthernet0/20
+ description HR-PC1
+ switchport access vlan 600
+ switchport mode access
+ switchport voice vlan 20
+ switchport port-security maximum 3
+ switchport port-security
+ switchport port-security aging time 10
+ switchport port-security violation restrict
+ ip access-group 101 in
+ spanning-tree portfast
+!
+interface FastEthernet0/21
+ switchport access vlan 700
+ switchport mode access
+ switchport port-security maximum 3
+ switchport port-security
+ switchport port-security aging time 10
+ switchport port-security violation restrict
+ spanning-tree portfast
+!
+interface FastEthernet0/22
+ switchport port-security maximum 3
+ switchport port-security aging time 10
+ switchport port-security violation restrict
+!
+interface FastEthernet0/23
+ switchport port-security maximum 3
+ switchport port-security aging time 10
+ switchport port-security violation restrict
+!
+interface FastEthernet0/24
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport port-security maximum 3
+ switchport port-security aging time 10
+ switchport port-security violation restrict
+!
+interface GigabitEthernet0/1
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ ip address 192.168.1.101 255.255.255.0
+!
+interface Vlan600
+ ip address 172.31.60.254 255.255.255.0
+ ip access-group 103 in
+ ip helper-address 192.168.50.10
+!
+interface Vlan700
+ ip address 172.31.70.254 255.255.255.0
+!
+ip http server
+ip http secure-server
+!
+!
+!
+access-list 100 deny   ip host 172.31.60.51 host 172.31.70.51
+access-list 100 permit ip any any
+access-list 101 deny   ip host 172.31.60.51 172.31.70.0 0.0.0.255
+access-list 101 permit ip any any
+access-list 102 deny   ip 172.31.60.0 0.0.0.255 172.31.70.0 0.0.0.255
+access-list 102 permit ip any any
+access-list 103 permit ip 172.31.60.0 0.0.0.255 host 172.31.70.254
+access-list 103 deny   ip 172.31.60.0 0.0.0.255 172.31.70.0 0.0.0.255
+access-list 103 permit ip any any
+access-list 150 permit ip host 172.31.60.51 host 172.31.70.51
+!
+!
+!
+line con 0
+ speed 19200
+line vty 0 4
+ login local
+ transport input telnet
+line vty 5 15
+ login
+!
+end
