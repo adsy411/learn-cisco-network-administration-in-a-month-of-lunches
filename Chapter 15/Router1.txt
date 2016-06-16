@@ -1,0 +1,83 @@
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname Router1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+ip cef
+!
+!
+!
+!
+no ip domain lookup
+!
+multilink bundle-name authenticated
+!         
+!
+!
+!
+username admin privilege 15 secret 5 $1$Swun$kTCah7La5KG4I4.jT.wAk/
+archive
+ log config
+  hidekeys
+!
+! 
+!
+!
+!
+!
+interface FastEthernet0/0
+ description to Switch1
+ ip address 192.168.1.201 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/0.999
+ encapsulation dot1Q 999
+ ip address 10.0.12.2 255.255.255.252
+!         
+interface FastEthernet0/1
+ description To Switch1 Fa0/12
+ ip address 10.0.21.2 255.255.255.252
+ duplex auto
+ speed auto
+!
+ip route 172.31.60.0 255.255.255.0 10.0.12.1
+ip route 172.31.70.0 255.255.255.0 10.0.21.1
+!
+!
+no ip http server
+no ip http secure-server
+!
+access-list 100 deny   ip 172.31.60.0 0.0.0.255 172.31.70.0 0.0.0.255
+access-list 100 permit ip any any
+access-list 101 deny   ip 172.31.70.0 0.0.0.255 172.31.60.0 0.0.0.255
+access-list 101 permit ip any any
+!
+!
+!
+!
+!
+!         
+control-plane
+!
+!
+!
+line con 0
+ speed 19200
+line aux 0
+line vty 0 4
+ login local
+ transport input telnet
+line vty 5 807
+ login local
+ transport input telnet
+!
+scheduler allocate 20000 1000
+end

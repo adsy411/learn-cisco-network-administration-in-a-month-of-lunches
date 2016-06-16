@@ -1,0 +1,193 @@
+version 15.0
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname Switch2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$UC8P$mwM.rQZLYGvgg.sFFwEK4.
+!
+username admin privilege 15 secret 5 $1$8gpL$EzQVt422u4kjdXQfa93TT.
+no aaa new-model
+system mtu routing 1500
+ip routing
+no ip domain-lookup
+ip domain-name benpiper.com
+!
+ip dhcp excluded-address 172.31.70.251 172.31.70.254
+ip dhcp excluded-address 172.31.70.1 172.31.70.49
+!
+ip dhcp pool Executives
+ network 172.31.70.0 255.255.255.0
+ dns-server 192.168.100.10 192.168.100.11 
+ default-router 172.31.70.254 
+ domain-name benpiper.com
+ lease 7
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-1351118208
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-1351118208
+ revocation-check none
+ rsakeypair TP-self-signed-1351118208
+!
+!
+crypto pki certificate chain TP-self-signed-1351118208
+ certificate self-signed 01
+  3082022B 30820194 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 31333531 31313832 3038301E 170D3933 30333031 30303030 
+  35385A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D31 33353131 
+  31383230 3830819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  8100A464 504515E4 0BB776EA FEA09229 5125B2A5 8B58847E 87EB95AE 86AA2B7D 
+  9D160CAA 1E7CF74D 7F731E86 8182533A 60574F8B C2DB8AF2 EF2EA761 6FD1ADC8 
+  D54408EA 79C32CAE 5E78C7D0 9E4DE708 F2DF8ED8 979BE554 95A0039A BF9B04FF 
+  D2D2BFED BB706685 09295356 B2972439 234D38CB B14A469F C4BD8297 BDE33CEB 
+  CA1B0203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 301F0603 
+  551D2304 18301680 14F6312C 1501787E 5895854F 86E58EAB BD192897 68301D06 
+  03551D0E 04160414 F6312C15 01787E58 95854F86 E58EABBD 19289768 300D0609 
+  2A864886 F70D0101 05050003 81810007 84B9E312 30E81A05 12007395 E37CB545 
+  2AF45AC6 EEDEA39C 1732E114 9C965AD3 3FF97747 6DC8F2F3 02FD2660 080C9BA6 
+  F47BB044 8A3FBB70 84319B12 F8D5FE5B EBDE86EF EEC2AC35 500A907C C44BB8DF 
+  85D2C870 193B1AEB 010F0BC7 B803AE05 ECC97B14 3D4EC911 A902EFDA 7FAEDC07 
+  D2344334 121CCD7F 1D238B3B 7C3FEA
+  	quit
+!
+!
+!         
+!
+!
+!
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Port-channel1
+!
+interface FastEthernet0/1
+ switchport mode access
+!
+interface FastEthernet0/2
+ switchport mode access
+!
+interface FastEthernet0/3
+ switchport mode access
+!
+interface FastEthernet0/4
+ switchport mode access
+!
+interface FastEthernet0/5
+ switchport mode access
+!
+interface FastEthernet0/6
+ switchport mode access
+!
+interface FastEthernet0/7
+ switchport mode access
+!
+interface FastEthernet0/8
+ switchport mode access
+!
+interface FastEthernet0/9
+ switchport mode access
+!
+interface FastEthernet0/10
+ switchport mode access
+!
+interface FastEthernet0/11
+ switchport mode access
+!
+interface FastEthernet0/12
+ no switchport
+ ip address 10.0.21.1 255.255.255.252
+!
+interface FastEthernet0/13
+ switchport mode access
+!
+interface FastEthernet0/14
+ switchport mode access
+!
+interface FastEthernet0/15
+ switchport mode access
+!
+interface FastEthernet0/16
+ switchport mode access
+!
+interface FastEthernet0/17
+ switchport mode access
+!
+interface FastEthernet0/18
+ switchport mode access
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+ switchport mode access
+!
+interface FastEthernet0/21
+ switchport access vlan 700
+ spanning-tree portfast
+!
+interface FastEthernet0/22
+ channel-group 1 mode active
+!
+interface FastEthernet0/23
+ channel-group 1 mode active
+!
+interface FastEthernet0/24
+ channel-group 1 mode active
+!
+interface GigabitEthernet0/1
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ ip address 192.168.1.102 255.255.255.0
+!
+interface Vlan700
+ ip address 172.31.70.254 255.255.255.0
+!
+interface Vlan900
+ no ip address
+!
+ip http server
+ip http secure-server
+!
+!
+ip route 172.31.60.0 255.255.255.0 10.0.21.2
+!
+!
+!
+!
+line con 0
+ speed 19200
+line vty 0 4
+ login local
+ transport input telnet
+line vty 5 15
+ login
+!
+end
