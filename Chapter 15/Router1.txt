@@ -48,8 +48,6 @@ interface FastEthernet0/1
  duplex auto
  speed auto
 !
-ip route 172.31.60.0 255.255.255.0 10.0.12.1
-ip route 172.31.70.0 255.255.255.0 10.0.21.1
 !
 !
 no ip http server
@@ -64,9 +62,9 @@ access-list 101 permit ip any any
 !
 !
 !
-!         
-control-plane
 !
+control-plane
+!         
 !
 !
 line con 0
